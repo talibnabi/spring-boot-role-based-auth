@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
 public class ApplicationController {
     private final ManagerService managerService;
 
@@ -19,7 +18,7 @@ public class ApplicationController {
     @RequestMapping("/")
     public String viewHomePage(Model model) {
         List<Manager> allManager = managerService.getAll();
-        model.addAttribute("All manager ", allManager);
+        model.addAttribute("listManager", allManager);
         return "index";
     }
 
@@ -38,7 +37,7 @@ public class ApplicationController {
 
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditManagerPage(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("edit_manager");
+        ModelAndView mav = new ModelAndView("edit_manager.html");
         Manager manager = managerService.getById(id);
         mav.addObject("manager", manager);
         return mav;
